@@ -1,23 +1,42 @@
-import logo from './logo.svg';
-import './App.css';
-
+import logo from "./logo.svg";
+import "./App.css";
+import React from "react";
 function App() {
+  // states
+  const [task, setTask] = React.useState(" ");
+  const [todos, setTodos] = React.useState([]);
+
+  console.log("todo list", todos, task);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="card">
+        <h1>Todo App</h1>
+        <div className="input-section">
+          <input
+            onChange={(event) => {
+              setTask(event.target.value);
+            }}
+          />{" "}
+          <button
+            onClick={() => {
+              const newTodos = [...todos];
+              newTodos.push(task);
+              setTodos(newTodos);
+              setTask("");
+            }}
+            className="btn add"
+          >
+            Add Task
+          </button>
+        </div>
+     <div class="task-section list">
+     <ol type='1'>
+          {todos.map((todo) => {
+            return <li>{todo}</li>;
+          })}
+        </ol>
+     </div>
+      </div>
     </div>
   );
 }
